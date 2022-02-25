@@ -201,6 +201,7 @@ A camada de transporte  é a responsavel pela comunicação entre processos fina
 destino.
 
 - TCP: (Transmistion Control Protocol) protocolo de comunicação confiavel e seguro que garante a entrega da mensagem, pois possui confirmação de recebimento, é orientado à conexão.
+
 Estado do TCP | Significado
 :------------:|:-----------------------------------------------:
 CLOSED	| condição que não há conexão entre dispositivo
