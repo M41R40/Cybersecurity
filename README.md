@@ -211,9 +211,7 @@ ESTABLISHED |  ambos os dispositivos receberam uma solicitação
 de conexão.
 CLOSE WAIT | um dos dispositivos recebeu do outro um pedido de
 encerramento da conexão.
-LAST ACK | o dispositivo que recebeu o pedido de encerramento e já
-o confirmou enviou seu próprio FIN e está aguardando um ACK para
-sua requisição.
+LAST ACK | o dispositivo que recebeu o pedido de encerramento e já o confirmou enviou seu próprio FIN e está aguardando um ACK para sua requisição.
 FIN WAIT | um dispositivo neste estado está aguardando um ACK para um FIN que enviou ou aguarda por uma solicitação de finaliza-
 ção de conexão originada pelo outro dispositivo.
 CLOSING | o dispositivo recebeu um FIN do outro dispositivo e enviou a ele um ACK, mas ainda não recebeu um ACK para sua própria
