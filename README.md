@@ -187,7 +187,7 @@ RFC 791 | Internet Protocol
 Usado para troca de diferente tipos de informação entre dispositivos IP em uma inter-rede. 
 
 
-O corpo do comando PING funciona no seguinte padrão
+O corpo do comando PING funciona no seguinte padrão com o protocolo ICMP. 
 Campo | Função
  :-------------:|:--------------------------------------------:|
  Type | campo com 8 bits que identifica o tipo de mensagem.
@@ -195,3 +195,31 @@ Campo | Função
  Checksum | campo com 16 bits para verificar a consistência da mensagem. 
  Message Body | campo de tamanha variavel destinado a mensagens de erro ou informação.
  
+#### TCP/IP: camada de transporte.
+
+A camada de transporte  é a responsavel pela comunicação entre processos finais. Ou seja de ponta a ponta. a entrega fim-a-fim não se limita apenas à entrega da mensagem de um computador a outro, mas também de um processo específico no computador de origem a um processo específico no computador de
+destino.
+
+- TCP: (Transmistion Control Protocol) protocolo de comunicação confiavel e seguro que garante a entrega da mensagem, pois possui confirmação de recebimento, é orientado à conexão.
+Estado do TCP | Significado
+:------------:|:-----------------------------------------------:
+CLOSED	| condição que não há conexão entre dispositivo
+LISTEN | um dispositivo aguarda uma mensagem de sincronização.
+SYS-SENT | após a mensagem de sincronização este aguardando resposta do outro dispositivo.
+ESTABLISHED |  ambos os dispositivos receberam uma solicitação
+de conexão.
+CLOSE WAIT | um dos dispositivos recebeu do outro um pedido de
+encerramento da conexão.
+LAST ACK | o dispositivo que recebeu o pedido de encerramento e já
+o confirmou enviou seu próprio FIN e está aguardando um ACK para
+sua requisição.
+FIN WAIT | um dispositivo neste estado está aguardando um ACK para um FIN que enviou ou aguarda por uma solicitação de finaliza-
+ção de conexão originada pelo outro dispositivo.
+CLOSING | o dispositivo recebeu um FIN do outro dispositivo e enviou a ele um ACK, mas ainda não recebeu um ACK para sua própria
+mensagem FIN.
+- UDP (User Datagram Protocol) protocolo simples, utilizado para transporte de pacotes sem conexão, não requer confirmação de recebimento.
+
+
+
+
+
