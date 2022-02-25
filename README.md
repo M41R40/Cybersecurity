@@ -156,7 +156,7 @@ Em 1969 a Advanced Research Projects Agency (ARPA) desenvolveu uma rede experime
 
 A suíte de protocolos TCP/IP é baseada em
 um modelo (de rede) com quatro camadas, diferente do modelo OSI que possui sete camadas – são diferentes.
-Adotado como padrão militar em 1983.
+O TCP foi adotado como padrão militar em 1983.
 
 Modelo OSI | Modelo TCP/IP
 :-----------:|:-----------------:
@@ -169,3 +169,29 @@ Enlace | Acesso à rede: também algumas vezes referenciada simplesmente como ca
 Física | 
 
 
+#### Cabeçalho IPV4
+Campo | Responsabilidade 
+:-------------: | :-------------------------------------:
+Version | Versão : Onde se define se é um ipv6 ou ipv4.
+Protocol | Ip protocol. 1 ICMP, 2 IGMP, 6 TCP, 17 UDP.
+Fragment Offset | Fragmentação de pacotes,  campo de 13 bits.
+IP Flags | Dont Fragment or M More fragments follow.
+Header Length | campo de 4 btis 
+Total Length | campo de 16 bits 
+Header Checksum | Campo que verifica a consistência do cabeçalho. 
+RFC 791 | Internet Protocol 
+
+
+#### Protocolo ICMP (Internet Control Message Protocol).
+
+Usado para troca de diferente tipos de informação entre dispositivos IP em uma inter-rede. 
+
+
+O corpo do comando PING funciona no seguinte padrão
+Campo | Função
+ :-------------:|:--------------------------------------------:|
+ Type | campo com 8 bits que identifica o tipo de mensagem.
+ Code | campo com 8 bits que identifica o subtipo da mensagem.
+ Checksum | campo com 16 bits para verificar a consistência da mensagem. 
+ Message Body | campo de tamanha variavel destinado a mensagens de erro ou informação.
+ 
