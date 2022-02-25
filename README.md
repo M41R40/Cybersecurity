@@ -207,8 +207,7 @@ Estado do TCP | Significado
 CLOSED	| condição que não há conexão entre dispositivo
 LISTEN | um dispositivo aguarda uma mensagem de sincronização.
 SYS-SENT | após a mensagem de sincronização este aguardando resposta do outro dispositivo.
-ESTABLISHED |  ambos os dispositivos receberam uma solicitação
-de conexão.
+ESTABLISHED |  ambos os dispositivos receberam uma solicitação de conexão.
 CLOSE WAIT | um dos dispositivos recebeu do outro um pedido de encerramento da conexão.
 LAST ACK | o dispositivo que recebeu o pedido de encerramento e já o confirmou enviou seu próprio FIN e está aguardando um ACK para sua requisição.
 FIN WAIT | um dispositivo neste estado está aguardando um ACK para um FIN que enviou ou aguarda por uma solicitação de finalização de conexão originada pelo outro dispositivo.
