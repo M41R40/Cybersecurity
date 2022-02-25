@@ -166,7 +166,6 @@ Sessão |
 Transporte | Transporte: equivale à camada de TRANSPORTE do modelo OSI.
 Rede | Internet: equivale à camada de REDES do modelo OSI.
 Enlace | Acesso à rede: também algumas vezes referenciada simplesmente como camada de REDE, abrange as camadas FÍSICA e de Enlace do modelo OSI.
-
 Física | 
 
 
