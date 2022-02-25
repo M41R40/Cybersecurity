@@ -160,7 +160,6 @@ Adotado como padrão militar em 1983.
 
 Modelo OSI | Modelo TCP/IP
 :-----------:|:-----------------:
-
 Aplicação | Aplicação: abrange as camadas de SESSÃO, APRESENTAÇÃO e APLICAÇÃO do modelo OSI.
 Apresentação | 
 Sessão | 
