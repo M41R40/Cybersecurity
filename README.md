@@ -145,7 +145,29 @@ https://ocsinventory-ng.org/?lang=en
 Tambem se torna importante adquirir um SCAP (Security Content Automation Protocol), com maior dificuldade de aplicação, se torna vantajoso para auxiliar no planejamento e execução de varreduras de vulnerabilidades de forma automatizada e periodica. 
 
 
+## TCP/IP: principais caracteristicas, funcionamento e vulnerabilidade.
+
+#### Arpanet 
+
+Em 1969 a Advanced Research Projects Agency (ARPA) desenvolveu uma rede experimental comutada por pacotes, chamada arpanet, estudando a comunicação de dados de forma segura. 
+
+#### TCP/IP
 
 
+A suíte de protocolos TCP/IP é baseada em
+um modelo (de rede) com quatro camadas, diferente do modelo OSI que possui sete camadas – são diferentes.
+Adotado como padrão militar em 1983.
+
+Modelo OSI | Modelo TCP/IP
+:-----------:|:-----------------:
+
+Aplicação | Aplicação: abrange as camadas de SESSÃO, APRESENTAÇÃO e APLICAÇÃO do modelo OSI.
+Apresentação | 
+Sessão | 
+Transporte | Transporte: equivale à camada de TRANSPORTE do modelo OSI.
+Rede | Internet: equivale à camada de REDES do modelo OSI.
+Enlace | Acesso à rede: também algumas vezes referenciada simplesmente como camada de REDE, abrange as camadas FÍSICA e de Enlace do modelo OSI.
+
+Física | 
 
 
