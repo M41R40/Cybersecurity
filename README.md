@@ -214,6 +214,217 @@ FIN WAIT | um dispositivo neste estado está aguardando um ACK para um FIN que e
 CLOSING | o dispositivo recebeu um FIN do outro dispositivo e enviou a ele um ACK, mas ainda não recebeu um ACK para sua própria mensagem FIN.
 - UDP (User Datagram Protocol) protocolo simples, utilizado para transporte de pacotes sem conexão, não requer confirmação de recebimento.
 
+## TCP/IP: camada de aplicação.
+
+É a camada onde existe aplicações ouvindo para dispor de serviços, estão ligadas a protocolos.
+
+
+APLICAÇÃO | TRANSPORTE | PORTA | DESCRIÇÃO 
+:-----:|:---------:|:---:|:--------------------------------------------:
+SSH|TCP|22| Acesso remoto seguro (criptografado)
+TELNET|TCP|23| Acesso remoto sem criptografia
+SMTP|TCP|25|Transferencia de email entre servidor e cliente.
+DNS|UDP/TCP|53| Resolução de nomes.
+DHCP|UDP|67/68|Endereçamento dinâmico de hosts.
+HTTP|TCP|80|Navegação web.
+POP|TCP|110|Recebimento de emails.
+NTP|UDP|123|Sincronização de relogios dos hosts em uma rede. 
+
+Ferramenta: netstat: verifica o status da rede. 
+
+# Hypervisor (Laboratorio).
+
+## Instalação do Virtual Box.
+
+O virtual Box é um Hypervisor destinado a criação e o gerenciamento de máquinas virtuais. 
+
+Faça o download do pacote conforme seu sistema operacional local no site oficial:
+
+```html
+https://www.virtualbox.org/wiki/Downloads
+```
+
+Use o comando dentro da pasta que fez o Download do arquivo de instalação.
+
+```bash
+sudo dpkg -i nomedopacote.deb
+```
+
+Lembre-se da configuração se estiver usando linux.
+
+```bash
+sudo /sbin/vboxconfig
+```
+
+
+Não esqueça de instalar o extension pack.
+
+## Instalação do Vagrant.
+
+O curso orienta o download de uma iso de um debian, porem eu acho mais facil a criação de uma maquina com o vangrant. 
+
+No site do vagrant selecione seu sistema operacional e instale a ferramenta.
+
+```html
+https://www.vagrantup.com/downloads 
+```
+
+Procure por debian stretch64, e em um diretorio novo no terminal, rode os comandos:
+
+```bash
+vagrant init debian/stretch64
+vagrant up
+```
+
+Edite no Vagrantfile as informações:
+
+>config.vm.provider "virtualbox" do |vb|  # Display the VirtualBox GUI when booting the machine  vb.gui = true  # Customize the amount of memory on the VM vb.memory = "1024" end
+
+Use o comando vagrant provision para subir as mudanças. 
+
+##Análise de pacotes em redes TCP/IP.
+
+São aplicativos que analisam o tráfego, os dados, os pacotes especificamente, com base em cada camadas do modelo OSI estudados anteriormente. 
+
+- Verificar o tráfego gerado por protocolo.
+- Verificar a existência de gargalos na rede. 
+- Correlacionar eventos. 
+- Detectar intrusões. 
+- Implementar políticas de segurança. 
+
+
+### FTP. 
+
+FTP significa File Transfer Protocol, um termo em inglês cuja tradução é Protocolo de Transferência de Arquivos.
+
+
+Estabelecedor de conexão via dispositivo entre usuário e servidor, por meio dele é possivel realizar a troca de dados, quando devidamente conectados, funcionando por meio de um programa que conecta dois agentes: 
+
+
+- cliente: quem solicita o acesso aos dados; 
+- servidor: armazenador de informações.
+
+Para instalar o vsFTPD no debian, no terminal, use o comando :
+```bash
+apt-get install -y vsftpd
+```
+
+Verifique se o serviço esta ativo com o comando:
+```bash
+sudo systemctl status vsftpd
+```
+
+Use o ftp da seguinte forma:
+
+```bash
+ftp 192.168.0.200
+```
+![](imagens/ftp.png)
+
+### TCP-DUMP. 
+
+Monitoramento de rede, visualização por console ações que passam pela interface de rede. 
+
+
+Para instalar em sua máquina use o comando:
+
+```bash
+sudo apt install tcpdump 
+```
+
+Atualize o repositorio.
+
+```bash
+sudo apt update 
+sudo apt upgrade
+```
+
+Com o comando tcpdump -D é possivel visualizar as interfaces de rede ativas.
+
+```bash
+tcpdump -D
+```
+Para utilizar o tcpdump, lembrando que ele é via terminal, use o comando seguido pelo ip da máquina que esta na rede e deseja se conectar, lembre que o usuario e senha é do ip que deseja se conectar. 
+
+```bash
+tcpdump 192.168.0.101
+```
+
+
+E para setar qual interface deseja utilizar use o comando:
+
+```bash
+tcpdump -i eth1
+```
+
+Para ver oque esta sendo transmitido na rede no momento, use o parametro verbose -v :
+```bash
+tcpdump -i eth1 -v
+```
+
+![](imagens/captura.png)
+
+Para mudar o nome de dominio para ip use o parametro -n:
+
+```bash
+tcpdump -i eth1 -n
+```
+
+Para armazenar os dados em um arquivo .pcap, use o parametro -w:
+
+```bash
+tcpdump -i eth1 -v -w nome.pcap 
+```
+
+### Wireshark 
+
+O Wireshark, por sua vez, é um dos aplicativos mais completos e amplamente utilizados para análise de protocolos. Dispõe de interface gráfica simples e adequadamente configurável, sendo capaz de capturar os pacotes a serem analisados, ou extraí-los de arquivos no formato pcap, como os gerados pelo TCPDump.
+
+
+```bash
+sudo apt-get install wireshark 
+```
+
+Para capturar pacotes desta vez vamos utilizar o apache, porta 80:
+
+```bash 
+sudo apt install apache2
+sudo service apache2 start
+```
+
+Depois inicialize o wireshark no terminal. 
+
+```bash
+wireshark
+```
+
+Inicie a captura na interface correta a esquerda.
+
+
+Pingue do cliente ao servidor e verifique os pacotes sendo trocados por protocolo http.
+
+![](imagens/ping.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
