@@ -278,7 +278,10 @@ vagrant up
 
 Edite no Vagrantfile as informações:
 
->config.vm.provider "virtualbox" do |vb|  # Display the VirtualBox GUI when booting the machine  vb.gui = true  # Customize the amount of memory on the VM vb.memory = "1024" end
+>
+```sh
+config.vm.provider "virtualbox" do |vb|  # Display the VirtualBox GUI when booting the machine  vb.gui = true  # Customize the amount of memory on the VM vb.memory = "1024" end
+```
 
 Use o comando vagrant provision para subir as mudanças. 
 
@@ -406,10 +409,56 @@ Pingue do cliente ao servidor e verifique os pacotes sendo trocados por protocol
 ![](imagens/ping.png)
 
 
+## ATAQUES EM REDES TCP/IP.
 
 
+- Ataques passivos ou de reconhecimento: são processos simples com o objetivo de coletar informações sobre sistemas e serviços em execução na rede. Senhas, servidores disponiveis, hashes de senha e enndereços IPS, são algumas das informações coletadas neste tipo de ataque. 
+
+- Ataques ativos ou de comprometimento: são ataques que interferem no funcionamento dos sistemas e serviços, prejudicando usuarios ou dispositivos de rede. 
+
+- Ataques de paralisação ou negação de serviço: são os que tem como foco desabilitar ou impedir o funcionamento do sistema que esta em produção. DoS (Denial of Service), ou DDoS (Distributed Denial of Service). 
+
+### Simulando um ataque de Negação de serviço (DoS) com base no protocolo ARP Cache Poisoning. 
+
+Este ataque ocorre quando um atacante manipula a tabela ARP do sistema alvo, ou seja altera as informações de destino dos pacotes. 
+
+Eu usei o vagrant para criar duas máquinas, um debian e um ubuntu que são os clientes. Usei o metasploitable como servidor.
+
+- lab1 (Ubuntu) - 192.168.0.198 CLIENTE 
+- lab2 (Debian) - 192.168.0.191 CLIENTE
+- Metasploitable (Ubuntu)  - 192.168.0.104 SERVIDOR
+
+Depois ensino o passo a passo da instalação **************************
 
 
+### Testando a conectivadade das máquinas.
+
+Com o servidor pingue as outras duas para verificar a comunicação.
+
+![](imagens/pingmetasploitable.png)
+
+Depois disso instale o dnsiff no atacante (Ubuntu) com os comandos :
+
+```bash 
+apt-get update
+apt-get install -y dsniff
+arp -na 
+```
+Teste o comando arp -na para verificar o atual mapeamento entre os endereços da rede. 
+
+```bash
+arp -na
+```
+Agora repare no mac atual do servidor Metasploitable quando recebe o ping do debian cliente, é um mac e depois do ataque de envenenamento de pacotes com o Ubuntu atacante, muda o mac do servidor tornando assim o atacante o emissor de pacotes. 
+
+
+```bash
+sudo arpsoof -i enpOs8 -t 192.168.0.191 192.168.0.104 
+```
+
+Repita o comando arp no debian. 
+
+![](imagens/ataque.png)
 
 
 
