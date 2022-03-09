@@ -1,12 +1,14 @@
 # Estudos sobre CYBERSECURITY.
 
 Todo conteúdo é com base no curso CYBERSECURITY da fiap.
-
+```html
+https://on.fiap.com.br
+```
+# CAPITULO 1
 
 ## Definições.
 
 Cybersecurity abrange um conjunto de normas, procedimento e boas práticas, que ajudam na identificação e mitigação de riscos relacionados a exposições na internet.  
-
 
 ## Vetores de ataque.
 
@@ -36,6 +38,9 @@ Vetor é o motivação ou o meio em qual ocorreu o ataque, os principais são li
 
 Todo o levantamento de ativos da empresa para mapeamento de informações é muito importante. Impactando diretamente em processos internos específicos e simples da empresa, como quem tem acesso a informação, a necessidade daquele acesso para tal, o privilegio de acesso do usuario e a politica de segurança que a empresa propaga para evitar ou até mitigar riscos, tratando não apenas os efeitos mas as causas que levaram ao ataque.
 
+
+# CAPITULO 2
+
 ## Segurança da Informação.
 
 Definir a segurança da informação em uma só coisa é complicado, digamos que não se resume somente a equipamentos tecnologicos mas tambem processos, pessoas, ferramentas e documentos que regem toda uma area de mercado vasta.
@@ -49,7 +54,7 @@ Definir a segurança da informação em uma só coisa é complicado, digamos que
 
 Não se investe em segurança da informação calculando o retorno (ROI- Return Over Investment), mas sim em quanto se consegue economizar, minimizando os riscos aos quais os ativos da organização possam vir a ser expostos, sem obter benefícios, então dá-se ao negocio o calculo de quanto o investimento pode evitar a perda de dinheiro.
 
-## CID (confidencialidade, integridade e disponibilidade).
+### CID (confidencialidade, integridade e disponibilidade).
 
 Três pilares básicos da Segurança da Informação.
 
@@ -60,28 +65,30 @@ Três pilares básicos da Segurança da Informação.
 - Disponibilidade: deve estar acessível a informação quando necessária, aos que tiverem autorização para isso.
 
 
-## Privilégios minimos (Least Privilege)
+### Privilégios minimos (Least Privilege)
 
 A segurança da informação envolve muitos processos, entre os citados a **manutenção de privilégios mínimos** é o enfoque deste capitulo, que é a garantia de que um usuario comum não tenha privilégios semelhantes ao de um administrador.
 
 
-## Defesa em profundidade (Defense in depth)
+### Defesa em profundidade (Defense in depth)
 
 A defesa em profundidade é a implementação de um sistema defensivo em forma de camadas, onde varios mecanismos se complementam promovendo o sistema como um todo. 
 
 
-## Principio da simplicidade (KISS - Keep it Sample, Stupid)
+### Principio da simplicidade (KISS - Keep it Sample, Stupid)
 
 Um principio de que não se deve complitar a situação, que seja sucinto e simples. 
 
 É necessario sempre partir de um script, o ponto inicial para configurações de firewalls ou redes. 
 
-## Segregações de funções. (Separation of duties - SoD)
+### Segregações de funções. (Separation of duties - SoD)
 
 Método clássico para resolução de conflitos com o foco de previnir fraudes, sempre fazendo com que mais uma pessoa seja necessária para conclusão de uma tarefa. 
 
 > "Implementar uma separação de papéis e responsabilidades que reduza a possibilidade de um único individuo 
 
+
+# CAPITULO 3
 ## Riscos, vulnerabilidades e ameaças à segurança da informação e á continuidade de negócio. 
 
 ### Risco.
@@ -144,6 +151,7 @@ https://ocsinventory-ng.org/?lang=en
 
 Tambem se torna importante adquirir um SCAP (Security Content Automation Protocol), com maior dificuldade de aplicação, se torna vantajoso para auxiliar no planejamento e execução de varreduras de vulnerabilidades de forma automatizada e periodica. 
 
+# CAPITULO 4
 
 ## TCP/IP: principais caracteristicas, funcionamento e vulnerabilidade.
 
@@ -232,7 +240,7 @@ NTP|UDP|123|Sincronização de relogios dos hosts em uma rede.
 
 Ferramenta: netstat: verifica o status da rede. 
 
-# Hypervisor (Laboratorio).
+# CAPITULO 5 - Hypervisor (Laboratorio).
 
 ## Instalação do Virtual Box.
 
@@ -285,7 +293,9 @@ config.vm.provider "virtualbox" do |vb|  # Display the VirtualBox GUI when booti
 
 Use o comando vagrant provision para subir as mudanças. 
 
-##Análise de pacotes em redes TCP/IP.
+# CAPITULO 6
+
+## Análise de pacotes em redes TCP/IP.
 
 São aplicativos que analisam o tráfego, os dados, os pacotes especificamente, com base em cada camadas do modelo OSI estudados anteriormente. 
 
@@ -408,6 +418,7 @@ Pingue do cliente ao servidor e verifique os pacotes sendo trocados por protocol
 
 ![](imagens/ping.png)
 
+# CAPITULO 7
 
 ## ATAQUES EM REDES TCP/IP.
 
@@ -424,11 +435,43 @@ Este ataque ocorre quando um atacante manipula a tabela ARP do sistema alvo, ou 
 
 Eu usei o vagrant para criar duas máquinas, um debian e um ubuntu que são os clientes. Usei o metasploitable como servidor.
 
-- lab1 (Ubuntu) - 192.168.0.198 CLIENTE 
-- lab2 (Debian) - 192.168.0.191 CLIENTE
+- lab1 (Ubuntu) - 192.168.0.198 CLIENTE ATACANTE
+- lab2 (Debian) - 192.168.0.191 CLIENTE ALVO
 - Metasploitable (Ubuntu)  - 192.168.0.104 SERVIDOR
 
-Depois ensino o passo a passo da instalação **************************
+### Criando um ubuntu com vagrant. 
+
+Crie o diretorio lab1 baixe um arquivo de configuração de um ubuntu/focal64, com o comando:
+
+```bash
+mkdir lab1
+vagrant init ubuntu/focal64
+```
+
+Antes de iniciar é interessante alterar o IP, dependendo da sua rede no Vagrantfile que agora há na pasta lab1.
+
+Para ter uma interface gráfica descomente as linhas:
+
+```ruby
+ config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+     vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+     vb.memory = "1024"
+   end
+   
+```
+
+Instale pelo shell as atualizações que deseja, descomente as linhas e adicione aplicativos.
+
+```ruby
+  config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y xfce4 firefox apache2 -y
+   SHELL
+end
+```
 
 
 ### Testando a conectivadade das máquinas.
