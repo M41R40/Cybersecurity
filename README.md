@@ -589,7 +589,7 @@ Lembrando que é possivel verificar tambem durante o ataque de envenenamento de 
 Conforme a imagem. A comunicação entre debian cliente e servidor metasploitable não ocorre. 
 
 
-![](imagens/negacaodeservico.png)
+![](imagens/teste.png)
 
 
 
