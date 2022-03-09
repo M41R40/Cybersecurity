@@ -586,11 +586,10 @@ Repita o comando arp no debian.
 Lembrando que é possivel verificar tambem durante o ataque de envenenamento de pacotes a negação do serviço de comunicação pelo protocolo ICMP, já que esta redirecionado a comunicação do atacante. 
 
 
+Conforme a imagem. A comunicação entre debian cliente e servidor metasploitable não ocorre. 
+
+
 ![](imagens/negacaodeservico.png)
-
-
-
-
 
 
 
