@@ -473,12 +473,88 @@ Instale pelo shell as atualizações que deseja, descomente as linhas e adicione
 end
 ```
 
+Para iniciar a máquina:
+
+```bash
+vagrant up
+```
+> usuario/senha : vagrant
+
+### Criando um debian com vagrant. 
+
+Crie a pasta lab2, baixe o arquivo de configuração do debian/stretch64 pelo terminal.
+
+```bash
+mkdir lab2
+vagrant init debian/stretch64 
+```
+
+
+Antes de iniciar é interessante alterar o IP, dependendo da sua rede no Vagrantfile que agora há na pasta lab1.
+
+Para ter uma interface gráfica descomente as linhas:
+
+```ruby
+ config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+     vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+     vb.memory = "1024"
+   end
+   
+```
+
+Instale pelo shell as atualizações que deseja, descomente as linhas e adicione aplicativos.
+
+```ruby
+  config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y xfce4 firefox apache2 -y
+   SHELL
+end
+```
+
+
+Para iniciar a máquina:
+
+```bash
+vagrant up
+```
+
+> usuario/senha : vagrant
+
+
+### Instalação da Metasploitable com o virtualbox.
+
+Baixe a imagem pelo site:
+
+```bash
+https://sourceforge.net/projects/metasploitable/files/Metasploita-
+ble2/
+```
+
+Descompacte o arquivo com o comando:
+
+```bash
+unzip nomedoarquivo.zip
+```
+
+Crie a pasta lab3 e coloque todos os arquivos descompactados na nova pasta. 
+
+Abra o virtualbox e crie uma nova máquina linux, ubuntu 64 bits. 
+Memoria da forma que o virtualbox indica, selecione o arquivo vmdk na pasta nova e selecione para criar. 
+
+Pode precisar alterar a placa de rede de NAT para bridge nas configurações em rede. 
 
 ### Testando a conectivadade das máquinas.
 
 Com o servidor pingue as outras duas para verificar a comunicação.
 
 ![](imagens/pingmetasploitable.png)
+
+
+### Ataque de envenenamento de pacotes.
 
 Depois disso instale o dnsiff no atacante (Ubuntu) com os comandos :
 
@@ -504,10 +580,13 @@ Repita o comando arp no debian.
 ![](imagens/ataque.png)
 
 
+### Ataque de negação de serviço. 
 
 
+Lembrando que é possivel verificar tambem durante o ataque de envenenamento de pacotes a negação do serviço de comunicação pelo protocolo ICMP, já que esta redirecionado a comunicação do atacante. 
 
 
+![](imagens/negacaodeservico.png)
 
 
 
