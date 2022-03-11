@@ -717,4 +717,102 @@ Fazendo com que seja o alvo 192.168.0.190 o emissor dos pacotes há uma alta dem
 
 
 
+### Ataque por SYN Flood.
+
+O ataque por SYN Flood é um tipo de ataque de negação de serviço. Que altera a comunicação por meio de conexão TCP, no Handshake de quando o host recebe o ultimo ACK, que no caso deste ataque nunca é enviado, inundando o alvo com novas requisições de conexão.
+
+
+
+No debian atacante, instale o nmap com o comando:
+
+```bash
+sudo apt-get install nmap
+```
+
+Use a metasploitable como servidor. 
+
+Execute no debian atacante o nmap ao ip do servidor. 
+
+```bash
+sudo nmap 192.168.0.101
+```
+
+
+Capture com o wireshark em sua rede local para acompanhar graficamente oque acontece na rede. 
+
+![](imagens/nmap.png) 
+
+
+# CAPITULO 8.
+
+## Engenharia Social. 
+
+
+### Definições. 
+
+É um ataque onde se é explorado o meio social do ser humano, kevin mitcnic afirma que o elo mais fraco da segurança da informação é o ser humano. Necessita de pessoas, processos e tecnologias. 
+
+Os engenheiros sociais tem a caracteristica de explorar alguns sentimentos humanos comuns como:
+
+- Curiosidade: abordam assuntos populares ou atrativos para induzir o clique em arquivos maliciosos ou links que direcionam a sites falsos.
+- Preguiça: tiram proveito da negligência de alguns funcionários em seguir regras corporativas.
+- Solidariedade: criam falsas campanhas de doações, oferecem descontos e promoções; são extremamente prestativos em ajudar em transações nos terminais bancários de autoatendimento.
+- Vaidade: ofertam falsos produtos e serviços em condições imperdíveis, com o intuito de estimular a futilidade e o poder.
+- Medo: usam a persuasão e o convencimento para obter informações.
+- Ganância: oferecem falsas oportunidades de ganhos altos em pouco tempo.
+- Confiança: utilizam o nome de grandes corporações e de entidades governamentais para obter informações.
+- Ingenuidade: exploram o desconhecimento técnico e informacional das vítimas.
+
+
+### Furto de identidade (Identify theft).
+
+Furto de identidade e uma tentativa de um atacante de se passar por outra pessoa, por telefone, rede social ou por documentos. 
+Podendo ser o alvo uma pessoa jurida ou fisica. O atacante faz uma pesquisa por informações do alvo. 
+
+
+### Personificação (Impersonation).
+
+É quando o engenheiro social desempenha um papel semelhante ao de alguem, induzindo o alvo a dar acesso a sistemas ou informações. Um exemplo é alguem do suporte de TI que tem um papel influenciavel. 
+
+
+### Baiting (Isca).
+
+Neste ataque, se deixa uma isca como um pendrive ou CD, para que o alvo interaja com o dispositivo, que contem um codigo malicioso para interagir de forma involuntaria com a máquina. 
+
+
+### Pretexting. (Pretexto).
+
+É quando o atacante se apresenta como uma outra pessoa para obter informações privadas, mais que mentiras, ele cria um pretexto para induzir o alvo a passar a informação que deseja manipular. Um exemplo na fila do banco, uma pessoa que precisa de ajuda, e o atacante que oferece ajuda. 
+
+
+### Quid pro quo. (isto por aquilo).
+
+Dar um pouco ao alvo para ganhar muita informação em troca. 
+"A secretaria do diretor é muito bonita! Qual o nome dela, mesmo?".
+
+
+### Gift giving (presentear).
+
+Brindes por informações. Onde se oferta um brinde e a pessoa entrega a informação em troca de algo material.
+
+
+### Spear phising. 
+
+Semelhante ao phishing, o spear phishing só difere no caso da comunicação ser de conhecimento do alvo, então um colega de trabalho tirou proveito da informação do chefe. 
+
+
+### Shoulder surfing.
+
+Olhar por cima do ombro, quando o atacante descobre a olho as credenciais do alvo.
+
+
+### Dumpster diving (Mergulhar no lixo).
+
+Quando o atacante inspeciona o lixo do alvo, documentos de reuniões passadas que não foram incinerados, referencias bancarias, que foram descartados incorretamentes. 
+
+### URL obsfuscation (URL ofuscada).
+
+Websites falsificados, semelhantes aos originais, para enganar usuarios desatentos. Normalmente gerados por encurtadores de URL. 
+
+
 
