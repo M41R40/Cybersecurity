@@ -815,4 +815,210 @@ Quando o atacante inspeciona o lixo do alvo, documentos de reuniões passadas qu
 Websites falsificados, semelhantes aos originais, para enganar usuarios desatentos. Normalmente gerados por encurtadores de URL. 
 
 
+# CAPITULO 9
+
+
+## Fortificando os Hosts da Lan.
+
+
+### Firewall. 
+
+Dispositivo destinado a filtrar e disciplinar o tráfego da rede, conforme as politicas de segurança da empresa. 
+Existem dois tipos de implementação de políticas de segurança.
+
+- Por **adesão**: onde a empresa consientiza e orienta seus colaborados em relação ao uso das tecnologias e rede. 
+
+- Por **imposição**: onde é imposto regras de acesso, monitoramento na rede. De forma que obriga o colaborador a seguir a politica. 
+
+#### Conhecendo o IPTABLES.
+
+Popularmente conhecido no linux, é uma aplicação em userspace destinada para configurações das regras para filtragem de pacotes. 
+
+
+#### Laboratorio.
+
+Neste caso vamos utilizar 3 maquinas. 
+
+Para executar as máquinas.
+
+```bash
+vagrant up
+```
+
+- Debian - Debian - 192.168.0.191
+- Ubuntu - cliente - 192.168.0.190
+- Metasploitable - Servidor - 192.168.1.110
+
+
+Na metasploitable, teste o comando:
+
+```bash
+sudo iptables -L
+```
+![](imagens/iptables.png)
+
+
+Caso haja alguma regra atribuida, exclua elas com o comando:
+
+```bash
+sudo iptables -F
+```
+
+
+Edite o arquivo firewall.sh com o comando:
+
+```bash
+nano firewall.sh
+
+```
+
+Adicione o script:
+
+```bash
+#!/bin/bash
+clear
+iptables -F
+iptables -X
+#
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -p FORWARD DROP
+```
+
+Para executar dê permissão com o comando:
+```bash
+sudo chmod u+x firewall.sh
+```
+
+Execute o arquivo com o comando:
+
+```bash
+sudo su
+./firewall.sh
+```
+
+#### Criação de politicas de acesso. 
+
+##### Rede local. (loopback)
+Ainda no arquivo **firewall.sh** adicione o seguinte conteudo ao final do arquivo para negar a entrada de pacotes.
+
+```bash
+...
+iptables -A INPUT -i lo -j ACCEPT
+```
+
+Salve e execute o arquivo com o comando:
+
+```bash 
+./firewall.sh
+```
+
+Leia as novas regras.
+
+```bash
+iptables -L
+```
+Tente pingar. Será negada o envio de pacotes por causa da nova regra.
+
+```bash
+ping localhost
+```
+
+![](imagens/pingfail.png)
+
+
+Agora, para adicionar uma saída, adicione a linha ao arquivo **firewall.sh**. Se pingar depois o comando vai funcionar.
+
+```bash
+iptables -A OUTPUT -o lo -j ACCEPT 
+```
+
+##### Trafego ICMP.
+
+Adicione ao arquivo **firewall.sh** as linhas, para configurar acesso ao trafego icmp.
+
+
+```bash
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A OUTPUT -p icmp -j ACCEPT
+```
+
+# CAPITULO 10.
+
+
+## Criptografia.
+
+Criptografia é a arte de esconder informações, especificamente é o processo de aplicar a mensagem original a um algoritmo, tornando incompreensivel. Decriptografar é o processo de desencriptar a informação, tornando a legivel. Garante que a informação tenha autenticidade e integridade.
+
+
+Serviços como o telnet não criptografam as informações na comunicação, é preferivel utilizar o ssh que usa criptografia segura. 
+
+O uso da criptografia esta relacionado ao tempo que deseja privar a informação, transações bancarias por exemlplo utilizam criptografia rapida com tls e ssl que tambem são leves e funcionam em questão de segundos. 
+
+#### Criptografia simétrica (Chave privada).
+
+Esse tipo de sistema de criptografia, utiliza uma única chave, onde só possui a chave quem tem acesso a informação. É bastante rápido e simples, porém deixa a desejar no processo de distribuição da cahve entre os destinatários, necessitando de uma forma segura de comunicação e sofrer ataques de não repúdio, que impossibilita o destinatario de receber uma informação autentica. 
+
+#### Criptografia assimétrica (Chave pública).
+
+Neste tipo de sistema, se utiliza duas chaves. O remetente possui uma chave publica a qual usa para cifrar a informação que deseja enviar, o destinatario no caso precisa da chave privada que faz par a chave publica do remetente para ler a mensagem. A criptografia assimétrica possibilita é a mais utilizada atualmente e a mais segura, pois garante a confidencialidade e a autenticidade da mensagem. 
+
+#### Tipos de cifras.
+
+
+- Cifras de substituição: as primeiras cifras conhecidas, substitue o caractere por outro. 
+
+- Cifra de César: é uma cifra de substituição monoalfabética, onde ocorre o deslocamento predeterminado e o texto é substituido pela quantidade determinada de deslocamento; 
+
+- Cifra de Vigenère: é uma cifra de substituição polialfabética baseada na cifra de cesár.
+
+# CAPITULO 11.
+
+## Frameworks para teste de intrusão.
+
+#### Penetration testing (pentest).
+
+São testes de intrusão que simulam ataques para validação de segurança da aplicação. Existem fases em um pentest e podem ser executadas em diferentes contextos, localmente na rede ou via web ao servidor. 
+
+
+- **Preparação (pre-engagement interactions)**: Fase de contato inicial com foco de determinar o escopo e objetivo do teste, isso engloba quais hosts e IPs? Que tipo de teste ? Uso de exploits e negação de algum serviço? Terá tempo determinado ?
+
+- **Coleta de informações (intelligence gathering)**: É a fase de coleta de informações sobre a contratante, pode ser amplamente realizado com informações públicas disponiveis (OSINT).
+
+- **Modelagem de ameaças (threat modeling)**: Onde todas as informações coletadas no processo anterior são analisadas e direcionadas a uma forma de exploração. Plano de ação e métodos de ataque.
+
+- **Analíse de vulnerabilidades (vulnerability analysis)**: Processo do pentest que é focado em analisar as vulnerabilidades, falhas e exposições de informações de forma prática com o uso dos meios definidos no processo anterior. Escalar privilegios. 
+
+- **Exploração de falhas (exploitation)**: Consiste na exploração de falhas, sabendo que está falha a segurança na aplicação, o pentester testa a fim de obter vantagem sobre o serviço e impactar a organização. 
+
+- **Pós-exploração de falhas (post-exploitation)**: É o pós exploração das falhas, onde de identifica arquivos, escalação de privilégios obtidos, com o o objetivo de informar a organização a relevância da informação. 
+
+- **Geração de relatórios (reportings)**: processo de detalhamento sobre o teste de intrusão realizado, com a intenção de informar os pontos bons e ruins da invasão. Arquivo pdf ou doc com informações sobre o teste. 
+
+#### Estrutura de um Relátorio.
+
+**Histórico**: no qual é descrito o propósito do teste e são colocadas as definições de termos, eventualmente, não conhecidos pelos executivos, como exploits e vulnerability scanner.
+
+**Postura geral**: faz uma narrativa da eficácia geral do teste e da capacidade do pentester para atingir os objetivos traçados; oferece uma breve descrição do problema sistêmico identificado pelo teste (por exemplo, falta de gerenciamento efetivo de patch), bem como a capacidade de obter acesso a informações-chave e avaliar o impacto potencial para o negócio.
+
+**Perfil de risco**: oferece uma classificação geral da postura da empresa em relação à segurança, comparativamente a organizações semelhantes. É importante que na fase de PREPARAÇÃO (PRE-ENGAGEMENT) o pentester identifique o mecanismo a ser utilizado para pontuação, e o mecanismo individual para rastreamento e classificação dos riscos.
+ 
+**Resumo das recomendações**: oferece uma visão em alto nível das contra medidas a ser adotadas para correção de falhas e mitigação dos riscos evidenciados ao longo do teste de intrusão.
+
+**Mapa estratégico**: deve incluir um plano priorizado para correção dos itens inseguros encontrados, ponderados em alinhamento com os objetivos de negócios e potencial grau de impacto. Esta seção deve mapear diretamente as metas propostas e a matriz de ameaças criada na seção de MODELAGEM de AMEAÇAS. Ao definir metas baseadas em tempo/objetivos, esta seção oferecerá um plano de ação a ser implementado em diversas fases.
+
+**Introdução**: parte inicial em que deverão figurar especificidades do trabalho, tais como: escopo, pessoal envolvido no teste (contratado e contratante), objetivos do teste, ativos envolvidos e profundidade do teste, dentre outros
+aspectos.
+
+**Coleta de informações**: a coleta de informações e sua correta avaliação são os alicerces de um bom teste de intrusão. Quanto mais bem informado em relação ao ambiente estiver o pentester, melhores serão os resultados obtidos. Nesta seção, vários itens deverão figurar, a fim de evidenciar ao contratante a extensão das informações públicas e privadas obtidas durante a fase de COLETA de INFORMAÇÕES.
+
+**Avaliação de vulnerabilidades**: nesta seção é detalhado o que foi apurado na fase de ANÁLISE de VULNERABILIDADES do teste.
+
+**Exploração de falhas/verificação de vulnerabilidades**: nesta seção é detalhado o que foi apurado na fase de EXPLORAÇÃO de FALHAS do teste.
+
+**Pós-exploração de falhas**: nesta seção é detalhado o que foi apurado na fase de PÓS-EXPLORAÇÃO de FALHAS do teste.
+
+**Riscos/exposições**: com base nas informações obtidas nas fases anteriores do teste, esta seção oferecerá ao contratante uma estimativa das perdas decorrentes da exploração com sucesso das vulnerabilidades identificadas.
+
+**Conclusão**: oferece uma visão geral final do teste.
 
