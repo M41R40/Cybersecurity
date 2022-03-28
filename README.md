@@ -995,7 +995,7 @@ São testes de intrusão que simulam ataques para validação de segurança da a
 
 - **Geração de relatórios (reportings)**: processo de detalhamento sobre o teste de intrusão realizado, com a intenção de informar os pontos bons e ruins da invasão. Arquivo pdf ou doc com informações sobre o teste. 
 
-#### Estrutura de um Relátorio.
+#### Estrutura de um Relátorio. (Escopo).
 
 **Histórico**: no qual é descrito o propósito do teste e são colocadas as definições de termos, eventualmente, não conhecidos pelos executivos, como exploits e vulnerability scanner.
 
@@ -1021,4 +1021,73 @@ aspectos.
 **Riscos/exposições**: com base nas informações obtidas nas fases anteriores do teste, esta seção oferecerá ao contratante uma estimativa das perdas decorrentes da exploração com sucesso das vulnerabilidades identificadas.
 
 **Conclusão**: oferece uma visão geral final do teste.
+
+#### Tipo de testes de intrusão.
+
+- White box: onde o pentester tem conhecimento do ambiente que será testado. (Há informações disponiveis no scopo).
+
+- Black box: onde o pentester não tem permissão e nem informação para acesso a aplicação. Normalmente tem o objetivo de coletar informações especificas da empresa. 
+
+- Grey box: Uma mistura dos dois tipos anteriores, o pentester possui informações limitadas sobre o alvo, sendo declarado no escopo as informação desejadas. 
+
+Alguns sites destinados a exploração de falhas. 
+
+- DVWA
+- ROOT ME
+- Hack the box
+- hack.me
+
+
+#### Intelligence gathering (Coleta de informações).
+
+Processo do teste que é destinado a saber o maximo possivel sobre o alvo, a coleta de informações. 
+
+- Scanners de portas: com o uso do **nmap** é possivel reconhecer quais portas estão abertas ou serviços funcionando. 
+
+##### Port Scan
+
+A verredura de portas é especifica para saber quais portas da rede estão abertas.
+
+Inicie a metasplotable e o ubuntu. 
+
+Rode o comando no ubuntu:
+
+```bash
+nmap -T4 -A -v 192.168.0.7
+```
+
+Varios serviços estão expostos nas portas abertas.
+
+![](imagens/ubuntunmap.png)
+
+##### Vulnerability scanners (scanners de vulnerabilidades).
+
+São ferramentas destinadas a busca por vulnerabilidades como:
+
+- OpenVAS.
+- Nessus.
+- Zenmap.
+
+##### Metasploit Framework. 
+
+Ambiente linux o qual tem serviços vulneraveis para ser explorados. É uma framework para prática de testes de invasão. 
+
+##### Password List Generators (geradores de listas de senhas).
+
+Geradores de listas de senhas são muito utilizados no teste de intrusão, pois as senhas são alvos sensiveis.
+
+- Crunch.
+- PWGen.
+- ramdom.org - gerador de senha.
+
+##### Rainbow tables.
+
+São grandes tabelas de hashes
+
+- SHA1.
+- Hashkiller.io
+
+#### Exploitation.
+
+Fase de exploração, onde se executa toda ferramentas definidas e se captura informações. 
 
