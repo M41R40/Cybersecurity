@@ -1087,7 +1087,8 @@ São grandes tabelas de hashes
 - SHA1.
 - Hashkiller.io
 
-#### Exploitation.
 
-Fase de exploração, onde se executa toda ferramentas definidas e se captura informações. 
+#### Reporting.
+
+Fase onde se descreve todo o processo realizado, normalmente por um padrão executivo e o técnico de arquivo. 
 
